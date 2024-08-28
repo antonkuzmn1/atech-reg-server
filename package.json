@@ -1,6 +1,6 @@
 {
   "name": "atech-reg-server",
-  "version": "0.0.2-SNAPSHOT",
+  "version": "0.0.3-SNAPSHOT",
   "description": "",
   "main": "index.ts",
   "scripts": {
@@ -21,11 +21,8 @@
   "homepage": "https://github.com/antonkuzmn1/atech-reg-server#readme",
   "dependencies": {
     "@prisma/client": "^5.19.0",
-    "@types/bcrypt": "^5.0.2",
     "@types/express": "^4.17.21",
     "@types/jsonwebtoken": "^9.0.6",
-    "bcrypt": "^5.1.1",
-    "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
     "express": "^4.19.2",

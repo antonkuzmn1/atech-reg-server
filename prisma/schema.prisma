@@ -19,31 +19,7 @@ model User {
 
   username String @unique @db.Char(15)
   password String @db.Char(15)
-
-  groups UserGroup[]
-}
-
-model Group {
-  id      Int      @id @default(autoincrement())
-  created DateTime @default(now()) @db.Timestamp(0)
-  updated DateTime @updatedAt @db.Timestamp()
-  deleted Int      @default(0) @db.TinyInt()
-
-  name  String @unique @db.Char(50)
-  title String @default("") @db.Char(255)
-
-  users UserGroup[]
-}
-
-model UserGroup {
-  userId  Int
-  groupId Int
-  created DateTime @default(now()) @db.Timestamp(0)
-
-  user  User  @relation(fields: [userId], references: [id])
-  group Group @relation(fields: [groupId], references: [id])
-
-  @@id([userId, groupId])
+  admin    Int    @default(0) @db.TinyInt()
 }
 
 model Initiator {
