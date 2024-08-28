@@ -1,6 +1,6 @@
 {
   "name": "atech-reg-server",
-  "version": "0.0.1-SNAPSHOT",
+  "version": "0.0.2-SNAPSHOT",
   "description": "",
   "main": "index.ts",
   "scripts": {
@@ -30,17 +30,14 @@
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
     "jsonwebtoken": "^9.0.2",
-    "node-routeros": "^1.6.9",
     "prisma": "^5.18.0",
-    "winston": "^3.14.1",
-    "ws": "^8.18.0"
+    "winston": "^3.14.1"
   },
   "devDependencies": {
     "@types/cors": "^2.8.17",
     "@types/jest": "^29.5.12",
     "@types/node": "^22.1.0",
     "@types/supertest": "^6.0.2",
-    "@types/ws": "^8.5.12",
     "jest": "^29.7.0",
     "supertest": "^7.0.0",
     "ts-jest": "^29.2.4",
