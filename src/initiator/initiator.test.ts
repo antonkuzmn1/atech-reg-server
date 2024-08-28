@@ -6,8 +6,8 @@ const app = express();
 app.use(express.json());
 app.use('/api', router);
 
-describe('contractor', () => {
-    const url: string = '/api/contractor';
+describe('initiator', () => {
+    const url: string = '/api/initiator';
     const random: number = Math.floor(Math.random() * 100 * 100 * 100 * 100);
 
     describe('getAll', () => {
@@ -16,7 +16,7 @@ describe('contractor', () => {
                 .get(url)
                 .expect('Content-Type', /json/)
                 .expect(200);
-            expect(response.body.contractors)
+            expect(response.body.initiators)
                 .toBeDefined();
         });
     });

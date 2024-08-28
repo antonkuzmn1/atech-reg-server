@@ -2,25 +2,25 @@ import {Request, Response} from 'express';
 import {logger} from "../tools/logger";
 import {prisma} from "../tools/prisma";
 
-export class ContractorService {
+export class InitiatorService {
     constructor() {
-        logger.debug('ContractorService');
+        logger.debug('InitiatorService');
     }
 
     async getAll(req: Request, res: Response): Promise<Response> {
-        logger.debug('ContractorService.getAll');
+        logger.debug('InitiatorService.getAll');
 
-        const contractors = await prisma.contractor.findMany({
+        const initiators = await prisma.initiator.findMany({
             where: {
                 deleted: 0,
             },
         });
 
-        return res.status(200).json({contractors: contractors});
+        return res.status(200).json({initiators: initiators});
     }
 
     async create(req: Request, res: Response): Promise<Response> {
-        logger.debug('ContractorService.create');
+        logger.debug('InitiatorService.create');
 
         const name = req.body.name;
         if (!name) {
@@ -29,7 +29,7 @@ export class ContractorService {
         }
 
         try {
-            const response = await prisma.contractor.create({
+            const response = await prisma.initiator.create({
                 data: {
                     name: name.toString(),
                 },
