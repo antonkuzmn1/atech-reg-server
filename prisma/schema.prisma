@@ -54,7 +54,7 @@ model TableMain {
   updated DateTime @updatedAt @db.Timestamp()
   deleted Int      @default(0) @db.TinyInt()
 
-  name  String @unique @db.Char(50)
+  name  String @default("") @db.Char(50)
   title String @default("") @db.Char(255)
 
   dateInput       DateTime
@@ -79,7 +79,7 @@ model TableAll {
   updated DateTime @updatedAt @db.Timestamp()
   deleted Int      @default(0) @db.TinyInt()
 
-  name  String @unique @db.Char(50)
+  name  String @default("") @db.Char(50)
   title String @default("") @db.Char(255)
 
   dateDocument    DateTime

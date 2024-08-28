@@ -35,13 +35,6 @@ export class SecurityMiddleware {
                 where: {
                     id: decodedToken.id,
                     deleted: 0
-                },
-                include: {
-                    groups: {
-                        include: {
-                            group: true
-                        }
-                    }
                 }
             });
             if (!user) {
@@ -49,13 +42,8 @@ export class SecurityMiddleware {
                 return res.status(403).json({error: 'User does not exist'});
             }
 
-            const userWithGroupIds = {
-                ...user,
-                groupIds: user.groups.map(userGroup => userGroup.groupId),
-            };
-
             logger.info('User found with userId ' + decodedToken.id);
-            req.body.user = userWithGroupIds;
+            req.body.user = user;
             next();
         } catch (error) {
             console.error(error);
