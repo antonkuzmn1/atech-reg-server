@@ -1,0 +1,122 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider          = "mysql"
+  url               = env("DATABASE_URL")
+  shadowDatabaseUrl = env("SHADOW_DATABASE_URL")
+}
+
+model User {
+  id      Int      @id @default(autoincrement())
+  created DateTime @default(now()) @db.Timestamp(0)
+  updated DateTime @updatedAt @db.Timestamp()
+  deleted Int      @default(0) @db.TinyInt()
+
+  name  String @default("") @db.Char(100)
+  title String @default("") @db.Char(255)
+
+  username String @unique @db.Char(15)
+  password String @db.Char(15)
+
+  groups UserGroup[]
+}
+
+model Group {
+  id      Int      @id @default(autoincrement())
+  created DateTime @default(now()) @db.Timestamp(0)
+  updated DateTime @updatedAt @db.Timestamp()
+  deleted Int      @default(0) @db.TinyInt()
+
+  name  String @unique @db.Char(50)
+  title String @default("") @db.Char(255)
+
+  users UserGroup[]
+}
+
+model UserGroup {
+  userId  Int
+  groupId Int
+  created DateTime @default(now()) @db.Timestamp(0)
+
+  user  User  @relation(fields: [userId], references: [id])
+  group Group @relation(fields: [groupId], references: [id])
+
+  @@id([userId, groupId])
+}
+
+model Initiator {
+  id      Int      @id @default(autoincrement())
+  created DateTime @default(now()) @db.Timestamp(0)
+  updated DateTime @updatedAt @db.Timestamp()
+  deleted Int      @default(0) @db.TinyInt()
+
+  name  String @unique @db.Char(50)
+  title String @default("") @db.Char(255)
+
+  tablesMain TableMain[]
+  tablesAll  TableAll[]
+}
+
+model Contractor {
+  id      Int      @id @default(autoincrement())
+  created DateTime @default(now()) @db.Timestamp(0)
+  updated DateTime @updatedAt @db.Timestamp()
+  deleted Int      @default(0) @db.TinyInt()
+
+  name  String @unique @db.Char(50)
+  title String @default("") @db.Char(255)
+
+  tablesMain TableMain[]
+  tablesAll  TableAll[]
+}
+
+model TableMain {
+  id      Int      @id @default(autoincrement())
+  created DateTime @default(now()) @db.Timestamp(0)
+  updated DateTime @updatedAt @db.Timestamp()
+  deleted Int      @default(0) @db.TinyInt()
+
+  name  String @unique @db.Char(50)
+  title String @default("") @db.Char(255)
+
+  dateInput       DateTime
+  dateCopy        DateTime?
+  dateOrig        DateTime?
+  textDestination String    @db.Char(255)
+  sum             Float
+  sumClosing      Float
+  contractorId    Int       @default(0)
+  initiatorId     Int       @default(0)
+  ddAbout         Int       @default(0)
+  ddMark          Int       @default(0)
+  ddStatus        Int       @default(0)
+
+  contractor Contractor @relation(fields: [contractorId], references: [id])
+  initiator  Initiator  @relation(fields: [initiatorId], references: [id])
+}
+
+model TableAll {
+  id      Int      @id @default(autoincrement())
+  created DateTime @default(now()) @db.Timestamp(0)
+  updated DateTime @updatedAt @db.Timestamp()
+  deleted Int      @default(0) @db.TinyInt()
+
+  name  String @unique @db.Char(50)
+  title String @default("") @db.Char(255)
+
+  dateDocument    DateTime
+  dateCopy        DateTime
+  dateOrig        DateTime
+  textDestination String   @db.Char(255)
+  sum             Float
+  number          Int
+  contractorId    Int      @default(0)
+  initiatorId     Int      @default(0)
+  ddMark          Int      @default(0)
+  ddStatus        Int      @default(0)
+
+  contractor Contractor @relation(fields: [contractorId], references: [id])
+  initiator  Initiator  @relation(fields: [initiatorId], references: [id])
+}
